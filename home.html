@@ -24,14 +24,16 @@
     </nav>
     <div class="icons">
         <i class="fas fa-bars" id="menu-bars"></i>
-       <div class="search-container">
+        <div class="search-bar">
            <form action="/result" method="post">
-           <input type="text" name="anime" placeholder="anime">
-           <br>
-           <br>
-           <button type="Submit"> Search </button>
+           <input type="text" name="anime" placeholder="anime" 
+           class="search-bar__input" aria-label="search">
+           <button class="search-bar__submit">
+           <i class="fas fa-search" 
+           aria-label="submit search"></i>
+           </button>
            </form>
-               </div>
+        </div>
         <i class="search fas fa-search" id="search-icon"></i>
         <i class="fas fa-heart" id="heart"></i>
     </div>
