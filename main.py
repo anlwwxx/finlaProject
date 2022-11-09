@@ -328,7 +328,7 @@ with app.app_context():
 
 @app.route('/')
 def home():
-    titles = ['naruto', 'bleach', 'fairy tail', 'jojo', 'violet evergarden', 'durarara', 'baki hanma', 'chainsaw man', 'blue period']
+    titles = ['naruto', 'bleach', 'fairy tail', 'jojo', 'violet evergarden', 'durarara', 'baki hanma', 'chainsaw man', 'blue period', 'spy family']
     im = random.choice(titles)
     url1 = f'https://kitsu.io/api/edge/anime?filter[text]={im}'
     q = requests.get(url1)
