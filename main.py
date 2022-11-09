@@ -135,7 +135,7 @@ def login():
         if user:
             if bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
-                if user.id == 2 or user.id == 3:
+                if user.admins:
                     return redirect(url_for('administration'))
                 else:
                     return redirect(url_for('dashboard'))
