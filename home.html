@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+    <link rel="stylesheet" href="static/css/css.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.3/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+<header>
+<!--navbar-->
+    <a href="{{url_for('home')}}" class="logo"><i class="fas fa-infinity"></i>Prosto Sait</a>
+    <nav class="navbar">
+        <a class="active" href="#">Features</a>
+        <a class="#" href="#">Interesting</a>
+        <a class="#" href="{{url_for('register')}}">Sign In</a>
+        <a class="#" href="{{url_for('login')}}">Log in</a>
+    </nav>
+    <div class="icons">
+        <i class="fas fa-bars" id="menu-bars"></i>
+       <div class="search-container">
+           <form action="/result" method="post">
+           <input type="text" name="anime" placeholder="anime">
+           <br>
+           <br>
+           <button type="Submit"> Search </button>
+           </form>
+               </div>
+        <i class="search fas fa-search" id="search-icon"></i>
+        <i class="fas fa-heart" id="heart"></i>
+    </div>
+</header>
+
+
+<!--home section starts-->
+<section class="home" id="home">
+    <div class="swiper home-slider">
+
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+                <div class="box"><img src="{{q}}"></div>
+                <!-- <div class="box" style="background: url(static/css/large.jpg) no-repeat"> -->
+                    <div class="content">
+                        <h3>title </h3>
+                        <p> synopsis</p>
+                        <a href="#" class="btn">Download</a>
+                    </div>
+                <!-- </div> -->
+            </div>
+
+            <div class="swiper-slide">
+                <div class="box second" style="background: url(static/css/nar.jpg) no-repeat">
+                    <div class="content">
+                        <h3>title </h3>
+                        <p> synopsis</p>
+                        <a href="#" class="btn">Download</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide">
+                <div class="box" style="background: url(static/css/large.jpg) no-repeat">
+                    <div class="content">
+                        <h3>title </h3>
+                        <p> synopsis</p>
+                        <a href="#" class="btn">Download</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!--footer-->
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+<script src="static/css/main.js"></script>
+</body>
+</html>
