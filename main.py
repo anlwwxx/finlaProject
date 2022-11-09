@@ -1,7 +1,6 @@
 import requests, random
 from flask import Flask, render_template, url_for, redirect, request
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.sql import func
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
@@ -37,7 +36,24 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), nullable=False, unique=True)
     password = db.Column(db.String(80), nullable=False)
-    likes = db.relationships('Like', backref='user', passive_deletes=True)
+    likes = db.relationship('Like', foreign_keys='Like.user_id', backref='user', lazy='dynamic')
+    admins = db.relationship('Admin', backref='user')
+
+    def like_anime(self, anime):
+        if not self.has_liked_anime(anime):
+            like = Like(user_id=self.id, anime_id=anime.id)
+            db.session.add(like)
+
+    def unlike_anime(self, anime):
+        if self.has_liked_anime(anime):
+            Like.query.filter_by(
+                user_id=self.id,
+                anime_id=anime.id).delete()
+
+    def has_liked_anime(self, anime):
+        return Like.query.filter(
+            Like.user_id == self.id,
+            Like.anime_id == anime.id).count() > 0
 
 
 class Anime(db.Model):
@@ -46,15 +62,19 @@ class Anime(db.Model):
     poster = db.Column(db.String)
     originalTitle = db.Column(db.String)
     synopsis = db.Column(db.String)
-    likes = db.relationships('Like', backref='anime', passive_deletes=True)
-
+    likes = db.relationship('Like', backref='anime', lazy='dynamic')
 
 
 class Like(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    data_created = db.Column(db.Datetime(timezone=True), default=func.now())
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
-    anime_id = db.Column(db.Integer, db.ForeignKey('anime.id', ondelete='CASCADE'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    anime_id = db.Column(db.Integer, db.ForeignKey('anime.id'), nullable=False)
+
+
+class Admin(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.Integer, unique=True, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
 class RegistrationForm(FlaskForm):
@@ -115,7 +135,10 @@ def login():
         if user:
             if bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
-                return redirect(url_for('dashboard'))
+                if user.id == 2 or user.id == 3:
+                    return redirect(url_for('administration'))
+                else:
+                    return redirect(url_for('dashboard'))
     return render_template('login.html', form=form)
 
 
@@ -123,6 +146,12 @@ def login():
 @login_required
 def dashboard():
     return render_template('dashboard.html')
+
+
+@app.route('/administration', methods=['GET', 'POST'])
+@login_required
+def administration():
+    return render_template('administration.html')
 
 
 @app.route('/logout', methods=['GET', 'POST'])
@@ -174,6 +203,17 @@ def result():
                                )
 
 
+@app.route('/like/<int:anime_id>/<action>')
+@login_required
+def like_action(anime_id, action):
+    anime = Anime.query.filter_by(id=anime_id).first_or_404()
+    if action == 'like':
+        current_user.like_anime(anime)
+        db.session.commit()
+    if action == 'unlike':
+        current_user.unlike_anime(anime)
+        db.session.commit()
+    return render_template('dashboard.html')
 
 
 @app.errorhandler(IndexError)
