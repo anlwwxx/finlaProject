@@ -1,7 +1,7 @@
 from datetime import timedelta
 import requests
 import random
-from flask import Flask, render_template, url_for, redirect, request, session, app
+from flask import Flask, render_template, url_for, redirect, request, session, app, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from flask_wtf import FlaskForm
@@ -135,6 +135,8 @@ def login():
                     return redirect(url_for('administration'))
                 else:
                     return redirect(url_for('dashboard'))
+            #else:
+                flash('Wrong password for this account. Try it again')  
     return render_template('login.html', form=form)
 
 
@@ -162,6 +164,7 @@ def administration():
 @login_required
 def logout():
     logout_user()
+    #flash("You have been logged out!")
     return redirect(url_for('login'))
 
 
@@ -174,6 +177,7 @@ def register():
         new_user = User(username=form.username.data, password=hashed_password)
         db.session.add(new_user)
         db.session.commit()
+        #flash('You are now registered!')
         return redirect(url_for('login'))
 
     return render_template('register.html', form=form)
