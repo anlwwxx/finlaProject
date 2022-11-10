@@ -377,8 +377,6 @@ input[type="submit"]{
         font-size: 50%;
     }
 }
-
-
 /* .home{
     padding: 0;
 }
@@ -392,28 +390,11 @@ background-size: cover !important;
 background-position: center !important;
 justify-content: flex-end;
 padding: 2rem 9%;
+}*/
+
+table, th, td {
+  border: 1px solid;
 }
-.home .box{
-    justify-content: flex-start;
-}
-.home .box.second{
-justify-content: flex-end;
-}
-.home .box .content{
-width: 50rem;
-}
-.home .box .content h3{
-    font-size: 6rem;
-    color: #fff;
-    padding-top: .5rem;
-    text-transform: uppercase;
-}
-.home .box .content p{
-    line-height: 2;
-    color:#fff;
-    font-size: 1.5rem;
-    padding: 1rem 0;
-} */
 
 ::-webkit-scrollbar{
     width: 15px;
