@@ -59,5 +59,16 @@
     <a href="{{url_for('register')}}">Don't have an account</a><br>
     <a href="{{url_for('home')}}">Go back</a><br>
     <script src="static/css/main.js"></script>
+    
+    <!-- for registration -->
+    {% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+            <h3> {{ msg }} </h3>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+{% endblock %}
 </body>
 </html>
