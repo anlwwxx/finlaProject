@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Error</title>
-</head>
-<body>
+{% extends "home.html" %}
+{% block main %}
 <h3>Please go back and fill out search form </h3>
 <form>
  <input type="button" value="Go back!" onclick="history.back()">
 </form>
+<script src="static/css/main.js"></script>
+{% endblock %}
 </body>
 </html>
