@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home</title>
     <link rel="stylesheet" href="static/css/css.css">
@@ -15,12 +14,12 @@
 <body>
 <header>
 <!--navbar-->
-    <a href="{{url_for('home')}}" class="logo"><i class="fas fa-infinity"></i>Prosto Sait</a>
+    <a href="{{url_for('home')}}" class="logo"><i class="fas fa-cat"></i>Prosto Sait</a>
     <nav class="navbar">
-        <a class="active" href="#">Features</a>
-        <a class="#" href="#">Interesting</a>
-        <a class="#" href="{{url_for('register')}}">Sign In</a>
-        <a class="#" href="{{url_for('login')}}">Log in</a>
+        <a class="active" href="{{url_for('home')}}">Home</a>
+        <!-- <a href="#">Interesting</a> -->
+        <a href="{{url_for('register')}}">Sign In</a>
+        <a href="{{url_for('login')}}">Log in</a>
     </nav>
     <div class="icons">
         <i class="fas fa-bars" id="menu-bars"></i>
@@ -29,12 +28,11 @@
            <input type="text" name="anime" placeholder="anime" 
            class="search-bar__input" aria-label="search">
            <button class="search-bar__submit">
-           <i class="fas fa-search" 
+            <i class="fas fa-search" 
            aria-label="submit search"></i>
            </button>
            </form>
         </div>
-        <i class="search fas fa-search" id="search-icon"></i>
         <i class="fas fa-heart" id="heart"></i>
     </div>
 </header>
@@ -42,40 +40,37 @@
 
 <!--home section starts-->
 <section class="home" id="home">
+    <div class="box"><img src="{{image}}"></div>
     <div class="swiper home-slider">
 
         <div class="swiper-wrapper">
 
-            <div class="swiper-slide">
-                <div class="box"><img src="{{q}}"></div>
-                <!-- <div class="box" style="background: url(static/css/large.jpg) no-repeat"> -->
-                    <div class="content">
-                        <h3>title </h3>
-                        <p> synopsis</p>
-                        <a href="#" class="btn">Download</a>
-                    </div>
-                <!-- </div> -->
-            </div>
-
-            <div class="swiper-slide">
-                <div class="box second" style="background: url(static/css/nar.jpg) no-repeat">
-                    <div class="content">
-                        <h3>title </h3>
-                        <p> synopsis</p>
-                        <a href="#" class="btn">Download</a>
-                    </div>
+            <!-- <div class="swiper-slide">
+                <div class="content">
+                    <img src="static/css/img/noragami.jpg"> 
+                    <h3>title </h3>
+                    <p> synopsis</p>
+                    <a href="#" class="btn">More</a>
                 </div>
             </div>
 
             <div class="swiper-slide">
-                <div class="box" style="background: url(static/css/large.jpg) no-repeat">
-                    <div class="content">
-                        <h3>title </h3>
-                        <p> synopsis</p>
-                        <a href="#" class="btn">Download</a>
-                    </div>
+                <div class="content">
+                    <img src="static/css/img/haik.jpg">
+                    <h3>title </h3>
+                    <p> synopsis</p>
+                    <a href="#" class="btn">More</a>
                 </div>
             </div>
+
+            <div class="swiper-slide">
+                <div class="content">
+                    <img src="static/css/img/onepm.jpg">
+                    <h3>title </h3>
+                    <p> synopsis</p>
+                    <a href="#" class="btn">More</a>
+                </div>
+            </div> -->
 
         </div>
     </div>
